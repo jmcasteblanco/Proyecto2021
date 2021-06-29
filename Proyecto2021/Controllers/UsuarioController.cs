@@ -60,5 +60,59 @@ namespace Proyecto2021.Controllers
 
             return sb.ToString();
         }
+
+        public ActionResult Edit(int id)
+        {
+            try
+            {
+                using (var db = new inventariop2021Entities())
+                {
+                    usuario findUser = db.usuario.Where(a => a.id == id).FirstOrDefault();
+                    return View(findUser);
+                }
+            }
+            catch(Exception ex)
+              
+            {
+                ModelState.AddModelError("", "error " + ex);
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public ActionResult Edit(usuario usuarioedit)
+        {
+            try
+            {
+                using (var db = new inventariop2021Entities())
+                {
+                    usuario user = db.usuario.Find(usuarioedit.id);
+
+                    user.nombre = usuarioedit.nombre;
+                    user.apellido = usuarioedit.apellido;
+                    user.email = usuarioedit.email;
+                    user.fecha_nacimiento = usuarioedit.fecha_nacimiento;
+                    user.password = usuarioedit.password;
+
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }catch(Exception ex)
+            {
+                ModelState.AddModelError("", "error " + ex);
+                return View();
+            }
+        }
+
+        public ActionResult Details(int id)
+        {
+            using (var db = new inventariop2021Entities())
+            {
+                usuario user = db.usuario.Find(id);
+                return View(user);
+            }
+        }
     }
 }
