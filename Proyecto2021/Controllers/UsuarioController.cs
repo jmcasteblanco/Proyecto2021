@@ -114,5 +114,17 @@ namespace Proyecto2021.Controllers
                 return View(user);
             }
         }
+
+
+        public ActionResult Delete(int id)
+        {
+            using (var db = new inventariop2021Entities())
+            {
+                var usuario = db.usuario.Find(id);
+                db.usuario.Remove(usuario);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
     }
 }
