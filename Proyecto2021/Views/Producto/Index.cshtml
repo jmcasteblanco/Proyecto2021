@@ -4,27 +4,27 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Todos Los Productos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Nuevo Producto", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.nombre)
+            Nombre
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.percio_unitario)
+            Precio Unitario
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.descripcion)
+            Descripcion
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.cantidad)
+            Cantidad
         </th>
         <th>
-            proveedor
+            Proveedor
         </th>
         <th></th>
     </tr>
@@ -48,20 +48,21 @@
                 @Proyecto2021.Controllers.ProductoController.NombreProveedor(item.id_proveedor)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id }, new {@class = "linkDelete" })
+                @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Ver Todo", "Details", new { id = item.id }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.id }, new { @class = "linkDelete" })
             </td>
         </tr>
     }
 
 </table>
 
-<script>
+@section scripts{
+    <script>
         $(".linkDelete").click(function (event)){
             if (!confirm('¿ Esta seguro de eliminar ?')) {
                 event.preventDefault();
             }
         }
-</script>
-    }
+    </script>
+}
