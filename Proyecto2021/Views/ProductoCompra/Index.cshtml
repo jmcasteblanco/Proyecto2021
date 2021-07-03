@@ -5,21 +5,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Producto Compra</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Nuevo Producto Compra", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.id_compra)
+            Id Compra
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.id_producto)
+            Id Producto
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.cantidad)
+           Cantidad
         </th>
         <th></th>
     </tr>
@@ -30,15 +30,15 @@
             @Html.DisplayFor(modelItem => item.id_compra)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.id_producto)
+             @Proyecto2021.Controllers.ProductoCompraController.NombreProducto(item.id_producto)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.cantidad)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Editar", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Ver Todo", "Details", new { id=item.id }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.id })
         </td>
     </tr>
 }
