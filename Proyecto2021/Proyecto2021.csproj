@@ -317,6 +317,7 @@
     <Content Include="Views\ProductoImagen\Create.cshtml" />
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\UsuarioRol\Index.cshtml" />
+    <Content Include="Views\Usuario\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Proyecto2021.Controllers
 {
@@ -124,6 +125,33 @@ namespace Proyecto2021.Controllers
                 db.usuario.Remove(usuario);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+        }
+
+        public ActionResult Login(string message ="")
+        {
+            ViewBag.Message = message;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string email,string password)
+        {
+            string passEncrip = UsuarioController.HashSHA1(password);
+            using (var db = new inventariop2021Entities())
+            {
+                var userLogin = db.usuario.FirstOrDefault(e => e.email == email && e.password == passEncrip);
+                if(userLogin != null)
+                {
+                    FormsAuthentication.SetAuthCookie(userLogin.email, true);
+                    Session["User"] = userLogin;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return Login("Verifique sus datos");
+                }
             }
         }
     }
