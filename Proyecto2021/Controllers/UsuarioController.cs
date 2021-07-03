@@ -8,9 +8,9 @@ using System.Web.Security;
 namespace Proyecto2021.Controllers
 {
     public class UsuarioController : Controller
-    {  
-        
+    {
 
+        [Authorize]
         // GET: Usuario
         public ActionResult Index()
 
@@ -87,6 +87,9 @@ namespace Proyecto2021.Controllers
 
         public ActionResult Edit(usuario usuarioedit)
         {
+            if (!ModelState.IsValid)
+                return View();
+
             try
             {
                 using (var db = new inventariop2021Entities())

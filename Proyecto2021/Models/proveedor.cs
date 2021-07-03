@@ -11,10 +11,14 @@ namespace Proyecto2021.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class proveedor
     {
         public int id { get; set; }
+
+        [Required(ErrorMessage = "El nombre no puede ir vacio")]
+        [StringLength(20, ErrorMessage = "Usted supero el limite de 20 caracteres")]
         public string nombre { get; set; }
         public string direccion { get; set; }
         public string telefono { get; set; }
