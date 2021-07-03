@@ -8,7 +8,9 @@ using System.Web.Security;
 namespace Proyecto2021.Controllers
 {
     public class UsuarioController : Controller
-    {
+    {  
+        
+
         // GET: Usuario
         public ActionResult Index()
 
@@ -130,7 +132,7 @@ namespace Proyecto2021.Controllers
 
         public ActionResult Login(string message ="")
         {
-            ViewBag.Message = message;
+            ViewBag.Message = message; 
             return View();
         }
 
@@ -153,6 +155,14 @@ namespace Proyecto2021.Controllers
                     return Login("Verifique sus datos");
                 }
             }
+        }
+
+        [Authorize]
+
+        public ActionResult CloseSession()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
