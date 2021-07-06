@@ -1,6 +1,7 @@
 ﻿using Proyecto2021.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -117,6 +118,45 @@ namespace Proyecto2021.Controllers
             return View();
         }
 
+        [HttpPost]
+
+        public ActionResult uploadCSV(HttpPostedFileBase fileForm)
+        {
+            string filePath = string.Empty;
+            if (fileForm != null)
+            {
+                string path = Server.MapPath("~/Uploads/");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                filePath = path + Path.GetFileName(fileForm.FileName);
+                string extension = Path.GetExtension(fileForm.FileName);
+                fileForm.SaveAs(filePath);
+                string csvData = System.IO.File.ReadAllText(filePath);
+                foreach (string row in csvData.Split('\n'))
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        var newProveedor = new proveedor
+                        {
+                            nombre = row.Split(';')[0],
+                            direccion = row.Split(';')[1],
+                            telefono = row.Split(';')[2],
+                            nombre_contacto = row.Split(';')[3],
+                        };
+
+                        using (var db = new inventariop2021Entities())
+                        {
+                            db.proveedor.Add(newProveedor);
+                            db.SaveChanges();
+                        }
+                    }
+                }
+            }
+            return View();
+        }
 
     }
 }

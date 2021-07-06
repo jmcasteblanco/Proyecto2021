@@ -153,7 +153,7 @@ namespace Proyecto2021.Controllers
 
         public ActionResult ImprimirReporte()
         {
-            return new ActionAsPdf("Index") { FileName = "reporte.pdf" };
+            return new ActionAsPdf("Reporte") { FileName = "reporte.pdf" };
         }
     }
 }
