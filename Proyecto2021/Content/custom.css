@@ -1,0 +1,23 @@
+﻿/*aplicando estilos a una etiqueta*/
+
+body {
+    font-family: 'Arvo', serif;
+    font-family: 'Merriweather', serif;
+}
+
+/* aplicando estilos por medio de las clases*/
+.titulohome{
+
+}
+
+.navbar-inverse {
+    background-color:purple;
+}
+
+    .navbar-inverse .navbar-brand {
+        color: #000000;
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: #000000;
+    }
